@@ -5,7 +5,7 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchedLabels:
+    matchLabels:
       component: postgres
   template:
     metadata:
@@ -18,16 +18,16 @@ spec:
             claimName: database-persistent-volume-claim
       containers:
         - name: postgres
-          image: postgres:
+          image: postgres
           ports:
             - containerPort: 5432
-          volumeMounts: 
+          volumeMounts:
             - name: postgres-storage
               mountPath: /var/lib/postgresql/data
               subPath: postgres
           env:
             - name: PGPASSWORD
               valueFrom:
-                secretKeyReference:
+                secretKeyRef:
                   name: pgpassword
                   key: PGPASSWORD
