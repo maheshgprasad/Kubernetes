@@ -36,7 +36,8 @@ const redisPublisher = redisClient.duplicate();
 // Express route handlers
 
 app.get('/', (req, res) => {
-  res.send('Hi');
+  console.log('Home_Reached');
+  // res.send();
 });
 
 app.get('/values/all', async (req, res) => {
@@ -55,6 +56,7 @@ app.post('/values', async (req, res) => {
   const index = req.body.index;
 
   if (parseInt(index) > 40) {
+    console.log('Index too high to calculate | try');
     return res.status(422).send('Index too high');
   }
 
